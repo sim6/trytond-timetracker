@@ -3,7 +3,7 @@
 this repository contains the full copyright notices and license terms. -->
 <data>
     <xpath expr="/form/field[@name='company']" position="after">
-        <group col="3" colspan="4" id="buttons" string="Tracker">
+        <group col="3" colspan="4" id="buttons" string="Tracker" states="{'invisible': (Eval('type') == 'project')}">
             <button name="start_work_wizard" string="Start Tracker"/>
             <button name="stop_work" string="Stop Tracker"/>
             <button name="cancel_work" string="Cancel Tracker"/>
