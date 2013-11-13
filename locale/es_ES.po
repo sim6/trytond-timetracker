@@ -1,0 +1,76 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:project.work,working_employees:"
+msgid "Emloyee Working"
+msgstr "Empleados trabajando"
+
+msgctxt "field:timesheet.line,end:"
+msgid "End"
+msgstr "Finalizar"
+
+msgctxt "field:timesheet.line,start:"
+msgid "Start"
+msgstr "Inicio"
+
+msgctxt "field:timesheet.line.start_work.start,id:"
+msgid "ID"
+msgstr "Identificador"
+
+msgctxt "field:timesheet.line.start_work.start,opened_lines:"
+msgid "Opened Lines"
+msgstr "Líneas abiertas"
+
+msgctxt "field:timesheet.line.start_work.start,opened_tasks:"
+msgid "Opened Tasks"
+msgstr "Tareas abiertas"
+
+msgctxt "help:project.work,working_employees:"
+msgid "Employees working on this work"
+msgstr "Empleados trabajando en este trabajo"
+
+msgctxt "model:ir.action,name:act_start_work"
+msgid "Start Work"
+msgstr "Inicio trabajo"
+
+msgctxt "model:res.group,name:group_timetracker"
+msgid "Timetracker"
+msgstr "Seguimiento"
+
+msgctxt "model:timesheet.line.start_work.start,name:"
+msgid "Start Work Start"
+msgstr "Inicio trabajo"
+
+msgctxt "view:project.work:"
+msgid "Cancel Tracker"
+msgstr "Cancelar seguimiento"
+
+msgctxt "view:project.work:"
+msgid "Start Tracker"
+msgstr "Iniciar seguimiento"
+
+msgctxt "view:project.work:"
+msgid "Stop Tracker"
+msgstr "Aturar seguimiento"
+
+msgctxt "view:project.work:"
+msgid "Tracker"
+msgstr "Seguimiento"
+
+msgctxt "view:timesheet.line.start_work.start:"
+msgid "Start Work"
+msgstr "Inicio trabajo"
+
+msgctxt "wizard_button:timesheet.line.start_work,start,close_and_start_work:"
+msgid "Close & Start"
+msgstr "Cerrar y iniciar"
+
+msgctxt ""
+"wizard_button:timesheet.line.start_work,start,discard_and_start_work:"
+msgid "Discard & Start"
+msgstr "Omitir y iniciar"
+
+msgctxt "wizard_button:timesheet.line.start_work,start,end:"
+msgid "Cancel"
+msgstr "Cancelar"
