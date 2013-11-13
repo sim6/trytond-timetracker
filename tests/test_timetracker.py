@@ -16,9 +16,9 @@ from trytond.tests.test_tryton import test_view, test_depends
 from trytond.backend.sqlite.database import Database as SQLiteDatabase
 
 
-class TestCase(unittest.TestCase):
+class TimetrackerTestCase(unittest.TestCase):
     '''
-    Test module.
+    Test Timetracker module.
     '''
 
     def setUp(self):
@@ -49,7 +49,8 @@ def doctest_dropdb(test):
 
 def suite():
     suite = trytond.tests.test_tryton.suite()
-    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(TestCase))
+    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(
+            TimetrackerTestCase))
     # TODO: remove if no scenario needed.
     #suite.addTests(doctest.DocFileSuite('scenario_invoice.rst',
     #        setUp=doctest_dropdb, tearDown=doctest_dropdb, encoding='utf-8',
