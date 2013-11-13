@@ -1,0 +1,76 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:project.work,working_employees:"
+msgid "Emloyee Working"
+msgstr "Empleats treballant"
+
+msgctxt "field:timesheet.line,end:"
+msgid "End"
+msgstr "Finalitzat"
+
+msgctxt "field:timesheet.line,start:"
+msgid "Start"
+msgstr "Inici"
+
+msgctxt "field:timesheet.line.start_work.start,id:"
+msgid "ID"
+msgstr "Identificador"
+
+msgctxt "field:timesheet.line.start_work.start,opened_lines:"
+msgid "Opened Lines"
+msgstr "Linies obertes"
+
+msgctxt "field:timesheet.line.start_work.start,opened_tasks:"
+msgid "Opened Tasks"
+msgstr "Tasques en procés"
+
+msgctxt "help:project.work,working_employees:"
+msgid "Employees working on this work"
+msgstr "Empleats treballant en aquest treball"
+
+msgctxt "model:ir.action,name:act_start_work"
+msgid "Start Work"
+msgstr "Iniciar treball"
+
+msgctxt "model:res.group,name:group_timetracker"
+msgid "Timetracker"
+msgstr "Seguiment"
+
+msgctxt "model:timesheet.line.start_work.start,name:"
+msgid "Start Work Start"
+msgstr "Iniciar treball"
+
+msgctxt "view:project.work:"
+msgid "Cancel Tracker"
+msgstr "Cancel·la seguiment"
+
+msgctxt "view:project.work:"
+msgid "Start Tracker"
+msgstr "Inicia seguiment"
+
+msgctxt "view:project.work:"
+msgid "Stop Tracker"
+msgstr "Atura seguiment"
+
+msgctxt "view:project.work:"
+msgid "Tracker"
+msgstr "Seguiment"
+
+msgctxt "view:timesheet.line.start_work.start:"
+msgid "Start Work"
+msgstr "Inicia treball"
+
+msgctxt "wizard_button:timesheet.line.start_work,start,close_and_start_work:"
+msgid "Close & Start"
+msgstr "Tanca i inicia"
+
+msgctxt ""
+"wizard_button:timesheet.line.start_work,start,discard_and_start_work:"
+msgid "Discard & Start"
+msgstr "Descarta i inicia"
+
+msgctxt "wizard_button:timesheet.line.start_work,start,end:"
+msgid "Cancel"
+msgstr "Cancel·la"
