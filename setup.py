@@ -6,7 +6,7 @@ import re
 import os
 import ConfigParser
 
-MODULE = timetracker
+MODULE = 'timetracker'
 PREFIX = 'nantic'
 MODULE2PREFIX = {}
 
