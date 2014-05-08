@@ -4,9 +4,8 @@ from trytond.model import ModelView, fields
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval
 from trytond.transaction import Transaction
-from trytond.wizard import Wizard, StateTransition, StateView, Button, StateAction
+from trytond.wizard import Wizard, StateTransition, StateView, Button
 import datetime
-import time
 
 __metaclass__ = PoolMeta
 
@@ -136,7 +135,7 @@ class Work:
         User = Pool().get('res.user')
         user = User(Transaction().user)
         line = Line()
-        line.work = self.id
+        line.work = self.work.id
         line.start = datetime.datetime.now().time()
         line.hours = 0
         line.employee = user.employee.id
@@ -174,5 +173,3 @@ class Work:
                 ])
         for line in lines:
             line.stop()
-
-Work()
