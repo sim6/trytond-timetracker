@@ -15,8 +15,7 @@ class Line:
     __name__ = 'timesheet.line'
 
     start = fields.Time('Start', states={'readonly': Bool(Eval('hours'))})
-    end = fields.Time('End', states={'readonly': Bool(Eval('hours'))},
-        on_change=['start', 'end'])
+    end = fields.Time('End', states={'readonly': Bool(Eval('hours'))})
 
     @classmethod
     def __setup__(cls):
@@ -48,6 +47,7 @@ class Line:
     def default_start():
         return datetime.datetime.now().time()
 
+    @fields.depends('start', 'end')
     def on_change_end(self):
         if self.start and self.end:
             return {'hours': self._calc_hours(self.end, self.start)}
