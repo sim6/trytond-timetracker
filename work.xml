@@ -57,11 +57,10 @@ this repository contains the full copyright notices and license terms. -->
       <field name="group" ref="timetracker.group_timetracker"/>
     </record>
 
-    <record model="ir.ui.view" id="start_work_start_view_form">
-      <field name="model">timesheet.line.start_work.start</field>
+    <record model="ir.ui.view" id="start_work_choose_action_view_form">
+      <field name="model">timesheet.line.start_work.choose_action</field>
       <field name="type">form</field>
       <field name="name">start_work_form</field>
     </record>
-
   </data>
 </tryton>

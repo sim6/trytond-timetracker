@@ -9,15 +9,20 @@ import datetime
 
 __metaclass__ = PoolMeta
 
-__all__ = ['Work', 'Employee', 'StartWorkStart', 'StartWork']
+__all__ = ['Work', 'Employee', 'StartWorkChooseAction', 'StartWork']
 
 
 class Employee:
     __name__ = 'company.employee'
 
-    def working_on(self):
+    def tasks_working_on(self):
+        pool = Pool()
+        Task = pool.get('project.work')
+
         lines = self.opened_timesheet_lines()
-        return [x.work for x in lines]
+        return Task.search([
+                ('work', 'in', [x.work.id for x in lines]),
+                ])
 
     def opened_timesheet_lines(self):
         Line = Pool().get('timesheet.line')
@@ -26,55 +31,63 @@ class Employee:
         return lines
 
 
-class StartWorkStart(ModelView):
-    'Start Work Start'
-    __name__ = "timesheet.line.start_work.start"
+class StartWorkChooseAction(ModelView):
+    'Start Work - Choose Action'
+    __name__ = "timesheet.line.start_work.choose_action"
 
     opened_lines = fields.Many2Many('timesheet.line',
             None, None, 'Opened Lines', readonly=True)
     opened_tasks = fields.Many2Many('project.work',
             None, None, 'Opened Tasks', readonly=True)
 
-    @staticmethod
-    def default_opened_lines():
-        User = Pool().get('res.user')
-        user = User(Transaction().user)
-        return [x.id for x in user.employee.opened_timesheet_lines()]
-
-    @staticmethod
-    def default_opened_tasks():
-        User = Pool().get('res.user')
-        user = User(Transaction().user)
-        return [x.id for x in user.employee.working_on()]
-
 
 class StartWork(Wizard):
     'Start Work'
     __name__ = 'timesheet.line.start_work'
 
-    start = StateView('timesheet.line.start_work.start',
-        'timetracker.start_work_start_view_form', [
+    start = StateTransition()
+    choose_action = StateView('timesheet.line.start_work.choose_action',
+        'timetracker.start_work_choose_action_view_form', [
             Button('Cancel', 'end', 'tryton-cancel'),
             Button('Discard & Start', 'discard_and_start_work'),
             Button('Close & Start', 'close_and_start_work', default=True)
             ])
-
     close_and_start_work = StateTransition()
     discard_and_start_work = StateTransition()
 
+    def default_choose_action(self, fields):
+        User = Pool().get('res.user')
+        user = User(Transaction().user)
+        return {
+            'opened_lines': [x.id
+                for x in user.employee.opened_timesheet_lines()],
+            'opened_tasks': [x.id for x in user.employee.tasks_working_on()],
+            }
+
+    def transition_start(self):
+        User = Pool().get('res.user')
+        user = User(Transaction().user)
+        if not user.employee.opened_timesheet_lines():
+            self._start_current_work()
+            return 'end'
+        return 'choose_action'
+
     def transition_close_and_start_work(self):
         Task = Pool().get('project.work')
-        Task.stop_work(self.start.opened_tasks)
-        task = Task(Transaction().context['active_id'])
-        task.start_work()
+        Task.stop_work(self.choose_action.opened_tasks)
+        self._start_current_work()
         return 'end'
 
     def transition_discard_and_start_work(self):
         Task = Pool().get('project.work')
-        Task.cancel_work(self.start.opened_tasks)
+        Task.cancel_work(self.choose_action.opened_tasks)
+        self._start_current_work()
+        return 'end'
+
+    def _start_current_work(self):
+        Task = Pool().get('project.work')
         task = Task(Transaction().context['active_id'])
         task.start_work()
-        return 'end'
 
 
 class Work:
@@ -89,20 +102,26 @@ class Work:
         super(Work, cls).__setup__()
         cls._buttons.update({
                 'start_work_wizard': {
-                    'invisible': (Eval('type') == 'project')
+                    'invisible': Eval('type') == 'project',
+                    'readonly': Eval('working_employees',
+                        []).contains(Eval('context', {}).get('employee', 0)),
                     },
                 'stop_work': {
-                    'invisible': (Eval('type') == 'project')
-                        },
+                    'invisible': Eval('type') == 'project',
+                    'readonly': ~Eval('working_employees',
+                        []).contains(Eval('context', {}).get('employee', 0)),
+                    },
                 'cancel_work': {
-                    'invisible': (Eval('type') == 'project')
+                    'invisible': Eval('type') == 'project',
+                    'readonly': ~Eval('working_employees',
+                        []).contains(Eval('context', {}).get('employee', 0)),
                     },
                 })
 
     def get_working_employees(self, name=None):
         Line = Pool().get('timesheet.line')
         lines = Line.search([
-                ('work', '=', self.id),
+                ('work', '=', self.work.id),
                 ('end', '=', None)])
         if not lines:
             return []
@@ -113,7 +132,7 @@ class Work:
         lines = Line.search([
                 ('end', '=', None),
                 ('employee', '=', self.id),
-                ('work', '=', self.id),
+                ('work', '=', self.work.id),
                 ])
         return [x.id for x in lines]
 

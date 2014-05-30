@@ -11,7 +11,7 @@ def register():
         Work,
         Line,
         Employee,
-        StartWorkStart,
+        StartWorkChooseAction,
         module='timetracker', type_='model')
     Pool.register(
         StartWork,

@@ -14,15 +14,15 @@ msgctxt "field:timesheet.line,start:"
 msgid "Start"
 msgstr "Inicio"
 
-msgctxt "field:timesheet.line.start_work.start,id:"
+msgctxt "field:timesheet.line.start_work.choose_action,id:"
 msgid "ID"
 msgstr "Identificador"
 
-msgctxt "field:timesheet.line.start_work.start,opened_lines:"
+msgctxt "field:timesheet.line.start_work.choose_action,opened_lines:"
 msgid "Opened Lines"
 msgstr "Líneas abiertas"
 
-msgctxt "field:timesheet.line.start_work.start,opened_tasks:"
+msgctxt "field:timesheet.line.start_work.choose_action,opened_tasks:"
 msgid "Opened Tasks"
 msgstr "Tareas abiertas"
 
@@ -38,7 +38,7 @@ msgctxt "model:res.group,name:group_timetracker"
 msgid "Timetracker"
 msgstr "Seguimiento"
 
-msgctxt "model:timesheet.line.start_work.start,name:"
+msgctxt "model:timesheet.line.start_work.choose_action,name:"
 msgid "Start Work Start"
 msgstr "Inicio trabajo"
 
@@ -58,19 +58,19 @@ msgctxt "view:project.work:"
 msgid "Tracker"
 msgstr "Seguimiento"
 
-msgctxt "view:timesheet.line.start_work.start:"
+msgctxt "view:timesheet.line.start_work.choose_action:"
 msgid "Start Work"
 msgstr "Inicio trabajo"
 
-msgctxt "wizard_button:timesheet.line.start_work,start,close_and_start_work:"
+msgctxt "wizard_button:timesheet.line.start_work,choose_action,close_and_start_work:"
 msgid "Close & Start"
 msgstr "Cerrar y iniciar"
 
 msgctxt ""
-"wizard_button:timesheet.line.start_work,start,discard_and_start_work:"
+"wizard_button:timesheet.line.start_work,choose_action,discard_and_start_work:"
 msgid "Discard & Start"
 msgstr "Omitir y iniciar"
 
-msgctxt "wizard_button:timesheet.line.start_work,start,end:"
+msgctxt "wizard_button:timesheet.line.start_work,choose_action,end:"
 msgid "Cancel"
 msgstr "Cancelar"
