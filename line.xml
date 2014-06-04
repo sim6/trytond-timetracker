@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
-this repository contains the full copyright notices and license terms. -->
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
 <tryton>
     <data>
         <record model="ir.ui.view" id="line_view_form">
@@ -8,12 +8,11 @@ this repository contains the full copyright notices and license terms. -->
             <field name="inherit" ref="timesheet.line_view_form"/>
             <field name="name">line_form</field>
         </record>
-        
+
         <record model="ir.ui.view" id="line_view_tree">
             <field name="model">timesheet.line</field>
             <field name="inherit" ref="timesheet.line_view_tree"/>
             <field name="name">line_tree</field>
         </record>
-        
     </data>
 </tryton>

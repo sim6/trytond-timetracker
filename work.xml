@@ -1,66 +1,66 @@
 <?xml version="1.0"?>
-<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
-this repository contains the full copyright notices and license terms. -->
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
 <tryton>
-  <data>
-    <record model="res.group" id="group_timetracker">
-      <field name="name">Timetracker</field>
-    </record>
-    <record model="res.user-res.group" id="user_admin_group_timetracker">
-      <field name="user" ref="res.user_admin"/>
-      <field name="group" ref="group_timetracker"/>
-    </record>
-    <record model="res.user-res.group" id="user_trigger_group_timetracker">
-      <field name="user" ref="res.user_trigger"/>
-      <field name="group" ref="group_timetracker"/>
-    </record>
-    <record model="ir.ui.view" id="work_view_form">
-      <field name="model">project.work</field>
-      <field name="inherit" ref="project.work_view_form"/>
-      <field name="name">work_form</field>
-    </record>
+    <data>
+        <record model="res.group" id="group_timetracker">
+            <field name="name">Timetracker</field>
+        </record>
+        <record model="res.user-res.group" id="user_admin_group_timetracker">
+            <field name="user" ref="res.user_admin"/>
+            <field name="group" ref="group_timetracker"/>
+        </record>
+        <record model="res.user-res.group" id="user_trigger_group_timetracker">
+            <field name="user" ref="res.user_trigger"/>
+            <field name="group" ref="group_timetracker"/>
+        </record>
+        <record model="ir.ui.view" id="work_view_form">
+            <field name="model">project.work</field>
+            <field name="inherit" ref="project.work_view_form"/>
+            <field name="name">work_form</field>
+        </record>
 
-    <record model="ir.model.button" id="start_work_button">
-      <field name="name">start_work_wizard</field>
-      <field name="model" search="[('model', '=', 'project.work')]"/>
-    </record>
-    <record model="ir.model.button-res.group" id="start_work_button_group_project">
-      <field name="button" ref="timetracker.start_work_button"/>
-      <field name="group" ref="timetracker.group_timetracker"/>
-    </record>
+        <record model="ir.model.button" id="start_work_button">
+            <field name="name">start_work_wizard</field>
+            <field name="model" search="[('model', '=', 'project.work')]"/>
+        </record>
+        <record model="ir.model.button-res.group" id="start_work_button_group_project">
+            <field name="button" ref="timetracker.start_work_button"/>
+            <field name="group" ref="timetracker.group_timetracker"/>
+        </record>
 
-    <record model="ir.model.button" id="stop_work_button">
-      <field name="name">stop_work</field>
-      <field name="model" search="[('model', '=', 'project.work')]"/>
-    </record>
-    <record model="ir.model.button-res.group" id="stop_work_button_group_project">
-      <field name="button" ref="timetracker.stop_work_button"/>
-      <field name="group" ref="timetracker.group_timetracker"/>
-    </record>
+        <record model="ir.model.button" id="stop_work_button">
+            <field name="name">stop_work</field>
+            <field name="model" search="[('model', '=', 'project.work')]"/>
+        </record>
+        <record model="ir.model.button-res.group" id="stop_work_button_group_project">
+            <field name="button" ref="timetracker.stop_work_button"/>
+            <field name="group" ref="timetracker.group_timetracker"/>
+        </record>
 
-    <record model="ir.model.button" id="cancel_work_button">
-      <field name="name">cancel_work</field>
-      <field name="model" search="[('model', '=', 'project.work')]"/>
-    </record>
-    <record model="ir.model.button-res.group" id="cancel_work_button_group_project">
-      <field name="button" ref="timetracker.cancel_work_button"/>
-      <field name="group" ref="timetracker.group_timetracker"/>
-    </record>
+        <record model="ir.model.button" id="cancel_work_button">
+            <field name="name">cancel_work</field>
+            <field name="model" search="[('model', '=', 'project.work')]"/>
+        </record>
+        <record model="ir.model.button-res.group" id="cancel_work_button_group_project">
+            <field name="button" ref="timetracker.cancel_work_button"/>
+            <field name="group" ref="timetracker.group_timetracker"/>
+        </record>
 
-    <record model="ir.action.wizard" id="act_start_work">
-      <field name="name">Start Work</field>
-      <field name="wiz_name">timesheet.line.start_work</field>
-    </record>
+        <record model="ir.action.wizard" id="act_start_work">
+            <field name="name">Start Work</field>
+            <field name="wiz_name">timesheet.line.start_work</field>
+        </record>
 
-    <record model="ir.action-res.group" id="start_work-group_timetracker">
-      <field name="action" ref="act_start_work"/>
-      <field name="group" ref="timetracker.group_timetracker"/>
-    </record>
+        <record model="ir.action-res.group" id="start_work-group_timetracker">
+            <field name="action" ref="act_start_work"/>
+            <field name="group" ref="timetracker.group_timetracker"/>
+        </record>
 
-    <record model="ir.ui.view" id="start_work_choose_action_view_form">
-      <field name="model">timesheet.line.start_work.choose_action</field>
-      <field name="type">form</field>
-      <field name="name">start_work_form</field>
-    </record>
-  </data>
+        <record model="ir.ui.view" id="start_work_choose_action_view_form">
+            <field name="model">timesheet.line.start_work.choose_action</field>
+            <field name="type">form</field>
+            <field name="name">start_work_form</field>
+        </record>
+    </data>
 </tryton>

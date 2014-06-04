@@ -1,15 +1,15 @@
-#This file is part of timetracker.The COPYRIGHT file at the top level of
-#this repository contains the full copyright notices and license terms.
+# The COPYRIGHT file at the top level of this repository contains the full
+# copyright notices and license terms.
+import datetime
+
 from trytond.model import ModelView, fields
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval
 from trytond.transaction import Transaction
 from trytond.wizard import Wizard, StateTransition, StateView, Button
-import datetime
-
-__metaclass__ = PoolMeta
 
 __all__ = ['Work', 'Employee', 'StartWorkChooseAction', 'StartWork']
+__metaclass__ = PoolMeta
 
 
 class Employee:
@@ -26,8 +26,10 @@ class Employee:
 
     def opened_timesheet_lines(self):
         Line = Pool().get('timesheet.line')
-        lines = Line.search([('end', '=', None),
-                ('employee', '=', self.id)])
+        lines = Line.search([
+                ('end', '=', None),
+                ('employee', '=', self.id),
+                ])
         return lines
 
 
@@ -35,10 +37,10 @@ class StartWorkChooseAction(ModelView):
     'Start Work - Choose Action'
     __name__ = "timesheet.line.start_work.choose_action"
 
-    opened_lines = fields.Many2Many('timesheet.line',
-            None, None, 'Opened Lines', readonly=True)
-    opened_tasks = fields.Many2Many('project.work',
-            None, None, 'Opened Tasks', readonly=True)
+    opened_lines = fields.Many2Many('timesheet.line', None, None,
+        'Opened Lines', readonly=True)
+    opened_tasks = fields.Many2Many('project.work', None, None, 'Opened Tasks',
+        readonly=True)
 
 
 class StartWork(Wizard):
