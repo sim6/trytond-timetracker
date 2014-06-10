@@ -25,22 +25,9 @@ class Line:
                     },
                 })
 
-    @classmethod
-    def copy(cls, lines, default=None):
-        if default is None:
-            default = {}
-        default = default.copy()
-        default['start'] = cls.default_start()
-        default['end'] = None
-        default['hours'] = cls.default_hours()
-
-        return super(Line, cls).copy(lines, default=default)
-
-    @classmethod
-    @ModelView.button
-    def finish(cls, lines):
-        for line in lines:
-            line.stop()
+    @staticmethod
+    def default_hours():
+        return 0.0
 
     @staticmethod
     def default_start():
@@ -52,9 +39,16 @@ class Line:
             return {'hours': self._calc_hours(self.end, self.start)}
         return {}
 
-    @staticmethod
-    def default_hours():
-        return 0.0
+    @classmethod
+    @ModelView.button
+    def finish(cls, lines):
+        for line in lines:
+            line.stop()
+
+    def stop(self):
+        self.end = datetime.datetime.now().time()
+        self.hours = self._calc_hours(self.end)
+        self.save()
 
     def _calc_hours(self, end, start=None):
         today = datetime.datetime.today()
@@ -62,7 +56,12 @@ class Line:
         start = datetime.datetime.combine(today, start or self.start)
         return round((end - start).seconds / 3600.0, 2)
 
-    def stop(self):
-        self.end = datetime.datetime.now().time()
-        self.hours = self._calc_hours(self.end)
-        self.save()
+    @classmethod
+    def copy(cls, lines, default=None):
+        if default is None:
+            default = {}
+        default = default.copy()
+        default['start'] = cls.default_start()
+        default['end'] = None
+        default['hours'] = cls.default_hours()
+        return super(Line, cls).copy(lines, default=default)
