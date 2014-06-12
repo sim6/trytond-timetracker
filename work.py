@@ -157,7 +157,7 @@ class Work:
         user = User(Transaction().user)
         line = Line()
         line.work = self.work.id
-        line.start = datetime.datetime.now().time()
+        line.start = datetime.datetime.now()
         line.hours = 0
         line.employee = user.employee.id
         line.save()

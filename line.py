@@ -99,14 +99,13 @@ class Line:
             line.stop()
 
     def stop(self):
-        self.end = datetime.datetime.now().time()
+        self.end = datetime.datetime.now()
         self.hours = self._calc_hours(self.end)
         self.save()
 
     def _calc_hours(self, end, start=None):
-        today = datetime.datetime.today()
-        end = datetime.datetime.combine(today, end)
-        start = datetime.datetime.combine(today, start or self.start)
+        if not start:
+            start = self.start
         return round((end - start).seconds / 3600.0, 2)
 
     @classmethod
