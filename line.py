@@ -42,7 +42,8 @@ class Line:
         # Migration from 3.0: change start/end field type
         table = TableHandler(cursor, cls, module_name)
         migrate_start_end = False
-        if table._columns['start']['typname'] == 'time':
+        if (table.column_exist('start') and
+                table._columns['start']['typname'] == 'time'):
             migrate_start_end = True
 
             def get_bak_column_name(column_name):
