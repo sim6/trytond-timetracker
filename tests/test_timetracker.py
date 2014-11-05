@@ -7,23 +7,17 @@ from trytond.tests.test_tryton import test_view, test_depends
 
 
 class TimetrackerTestCase(unittest.TestCase):
-    '''
-    Test Timetracker module.
-    '''
+    'Test Timetracker module'
 
     def setUp(self):
         trytond.tests.test_tryton.install_module('timetracker')
 
     def test0005views(self):
-        '''
-        Test views.
-        '''
+        'Test views'
         test_view('timetracker')
 
     def test0006depends(self):
-        '''
-        Test depends.
-        '''
+        'Test depends'
         test_depends()
 
 
