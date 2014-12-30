@@ -15,18 +15,19 @@ __metaclass__ = PoolMeta
 class Employee:
     __name__ = 'company.employee'
 
+    @property
     def tasks_working_on(self):
-        pool = Pool()
-        Task = pool.get('project.work')
-
-        lines = self.opened_timesheet_lines()
+        Task = Pool().get('project.work')
+        lines = self.opened_timesheet_lines
         return Task.search([
                 ('work', 'in', [x.work.id for x in lines]),
                 ])
 
+    @property
     def opened_timesheet_lines(self):
         Line = Pool().get('timesheet.line')
         lines = Line.search([
+                ('start', '!=', None),
                 ('end', '=', None),
                 ('employee', '=', self.id),
                 ])
@@ -62,14 +63,14 @@ class StartWork(Wizard):
         user = User(Transaction().user)
         return {
             'opened_lines': [x.id
-                for x in user.employee.opened_timesheet_lines()],
-            'opened_tasks': [x.id for x in user.employee.tasks_working_on()],
+                for x in user.employee.opened_timesheet_lines],
+            'opened_tasks': [x.id for x in user.employee.tasks_working_on],
             }
 
     def transition_start(self):
         User = Pool().get('res.user')
         user = User(Transaction().user)
-        if not user.employee.opened_timesheet_lines():
+        if not user.employee.opened_timesheet_lines:
             self._start_current_work()
             return 'end'
         return 'choose_action'
