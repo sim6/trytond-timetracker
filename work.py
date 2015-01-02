@@ -131,14 +131,6 @@ class Work:
             return []
         return list(set([x.employee.id for x in lines]))
 
-    def get_employee(self):
-        User = Pool().get('res.user')
-        user = User(Transaction().user)
-        if user.employee:
-            return user.employee.id
-        else:
-            return False
-
     @classmethod
     @ModelView.button_action('timetracker.act_start_work')
     def start_work_wizard(cls, tasks):
