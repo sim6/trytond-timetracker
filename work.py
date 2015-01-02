@@ -124,6 +124,7 @@ class Work:
     def get_working_employees(self, name=None):
         Line = Pool().get('timesheet.line')
         lines = Line.search([
+                ('start', '!=', None),
                 ('work', '=', self.work.id),
                 ('end', '=', None)])
         if not lines:
