@@ -131,15 +131,6 @@ class Work:
             return []
         return list(set([x.employee.id for x in lines]))
 
-    def get_open_timesheet_line(self):
-        Line = Pool().get('timesheet.line')
-        lines = Line.search([
-                ('end', '=', None),
-                ('employee', '=', self.id),
-                ('work', '=', self.work.id),
-                ])
-        return [x.id for x in lines]
-
     def get_employee(self):
         User = Pool().get('res.user')
         user = User(Transaction().user)
