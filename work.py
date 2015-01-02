@@ -129,7 +129,7 @@ class Work:
                 ('end', '=', None)])
         if not lines:
             return []
-        return [x.employee.id for x in lines]
+        return list(set([x.employee.id for x in lines]))
 
     def get_open_timesheet_line(self):
         Line = Pool().get('timesheet.line')
