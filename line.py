@@ -1,6 +1,7 @@
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
-import datetime
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 from sql import Cast
 from sql.operators import Concat
 
@@ -16,20 +17,15 @@ __metaclass__ = PoolMeta
 
 class Line:
     __name__ = 'timesheet.line'
-
-    start = fields.DateTime('Start', states={
-            'readonly': Bool(Eval('hours')),
-            })
-    end = fields.DateTime('End', states={
-            'readonly': Bool(Eval('hours')),
-            })
+    start = fields.DateTime('Start')
+    end = fields.DateTime('End')
 
     @classmethod
     def __setup__(cls):
         super(Line, cls).__setup__()
         cls._buttons.update({
                 'finish': {
-                    'invisible': Eval('end')
+                    'invisible': ~Eval('start') | Eval('end')
                     },
                 })
 
@@ -81,9 +77,22 @@ class Line:
     def default_hours():
         return 0.0
 
-    @staticmethod
-    def default_start():
-        return datetime.datetime.now()
+    @fields.depends('start', 'hours')
+    def on_change_hours(self):
+        if self.start and self.hours is not None:
+            return {
+                'end': self.start + relativedelta(seconds=round(self.hours
+                        * 3600))
+                }
+        return {}
+
+    @fields.depends('start', 'end')
+    def on_change_start(self):
+        if self.start and self.end:
+            return {
+                'hours': self._calc_hours(self.end, self.start),
+                }
+        return {}
 
     @fields.depends('start', 'end')
     def on_change_end(self):
@@ -100,14 +109,14 @@ class Line:
             line.stop()
 
     def stop(self):
-        self.end = datetime.datetime.now()
+        self.end = datetime.now()
         self.hours = self._calc_hours(self.end)
         self.save()
 
     def _calc_hours(self, end, start=None):
         if not start:
             start = self.start
-        return round((end - start).seconds / 3600.0, 2)
+        return round((end - start).total_seconds() / 3600.0, 2)
 
     @classmethod
     def copy(cls, lines, default=None):
