@@ -71,26 +71,24 @@ class StartWork(Wizard):
         User = Pool().get('res.user')
         user = User(Transaction().user)
         if not user.employee.opened_timesheet_lines:
-            self._start_current_work()
-            return 'end'
+            return self._start_current_work()
         return 'choose_action'
 
     def transition_close_and_start_work(self):
         Task = Pool().get('project.work')
         Task.stop_work(self.choose_action.opened_tasks)
-        self._start_current_work()
-        return 'end'
+        return self._start_current_work()
 
     def transition_discard_and_start_work(self):
         Task = Pool().get('project.work')
         Task.cancel_work(self.choose_action.opened_tasks)
-        self._start_current_work()
-        return 'end'
+        return self._start_current_work()
 
     def _start_current_work(self):
         Task = Pool().get('project.work')
         task = Task(Transaction().context['active_id'])
         task.start_work()
+        return 'end'
 
 
 class Work:
