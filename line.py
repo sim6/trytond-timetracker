@@ -11,10 +11,10 @@ from trytond.pyson import Eval
 from trytond.transaction import Transaction
 
 __all__ = ['Line']
-__metaclass__ = PoolMeta
 
 
 class Line:
+    __metaclass__ = PoolMeta
     __name__ = 'timesheet.line'
     start = fields.DateTime('Start')
     end = fields.DateTime('End')

@@ -7,10 +7,10 @@ from trytond.transaction import Transaction
 from trytond.wizard import Wizard, StateTransition, StateView, Button
 
 __all__ = ['Work', 'Employee', 'StartWorkChooseAction', 'StartWork']
-__metaclass__ = PoolMeta
 
 
 class Employee:
+    __metaclass__ = PoolMeta
     __name__ = 'company.employee'
 
     @property
@@ -95,6 +95,7 @@ class StartWork(Wizard):
 
 
 class Work:
+    __metaclass__ = PoolMeta
     __name__ = 'project.work'
 
     working_employees = fields.Function(fields.Many2Many('company.employee',
