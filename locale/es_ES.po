@@ -1,4 +1,4 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
@@ -39,20 +39,20 @@ msgid "Timetracker"
 msgstr "Seguimiento"
 
 msgctxt "model:timesheet.line.start_work.choose_action,name:"
-msgid "Start Work Start"
+msgid "Start Work - Choose Action"
 msgstr "Inicio trabajo"
 
 msgctxt "view:project.work:"
-msgid "Cancel Tracker"
-msgstr "Cancelar seguimiento"
+msgid "Cancel"
+msgstr "Cancelar"
 
 msgctxt "view:project.work:"
-msgid "Start Tracker"
-msgstr "Iniciar seguimiento"
+msgid "Start"
+msgstr "Iniciar"
 
 msgctxt "view:project.work:"
-msgid "Stop Tracker"
-msgstr "Aturar seguimiento"
+msgid "Stop"
+msgstr "Parar"
 
 msgctxt "view:project.work:"
 msgid "Tracker"
@@ -62,7 +62,20 @@ msgctxt "view:timesheet.line.start_work.choose_action:"
 msgid "Start Work"
 msgstr "Inicio trabajo"
 
-msgctxt "wizard_button:timesheet.line.start_work,choose_action,close_and_start_work:"
+msgctxt "view:timesheet.line:"
+msgid "End Time"
+msgstr "Hora final"
+
+msgctxt "view:timesheet.line:"
+msgid "Finish"
+msgstr "Finalizar"
+
+msgctxt "view:timesheet.line:"
+msgid "Start Time"
+msgstr "Hora de inicio"
+
+msgctxt ""
+"wizard_button:timesheet.line.start_work,choose_action,close_and_start_work:"
 msgid "Close & Start"
 msgstr "Cerrar y iniciar"
 
