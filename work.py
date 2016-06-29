@@ -2,7 +2,7 @@
 # copyright notices and license terms.
 from trytond.model import ModelView, fields
 from trytond.pool import Pool, PoolMeta
-from trytond.pyson import Eval
+from trytond.pyson import Eval, Bool
 from trytond.transaction import Transaction
 from trytond.wizard import Wizard, StateTransition, StateView, Button
 
@@ -93,6 +93,8 @@ class StartWork(Wizard):
         task.start_work()
         return 'end'
 
+invisible = ~Bool(Eval('timesheet_available', False))
+
 
 class Work:
     __metaclass__ = PoolMeta
@@ -107,17 +109,17 @@ class Work:
         super(Work, cls).__setup__()
         cls._buttons.update({
                 'start_work_wizard': {
-                    'invisible': Eval('type') == 'project',
+                    'invisible': invisible,
                     'readonly': Eval('working_employees',
                         []).contains(Eval('context', {}).get('employee', 0)),
                     },
                 'stop_work': {
-                    'invisible': Eval('type') == 'project',
+                    'invisible': invisible,
                     'readonly': ~Eval('working_employees',
                         []).contains(Eval('context', {}).get('employee', 0)),
                     },
                 'cancel_work': {
-                    'invisible': Eval('type') == 'project',
+                    'invisible': invisible,
                     'readonly': ~Eval('working_employees',
                         []).contains(Eval('context', {}).get('employee', 0)),
                     },
@@ -125,11 +127,11 @@ class Work:
 
     def get_working_employees(self, name=None):
         Line = Pool().get('timesheet.line')
-        if not self.work:
+        if not self.timesheet_available:
             return []
         lines = Line.search([
                 ('start', '!=', None),
-                ('work', '=', self.work.id),
+                ('work', 'in', [t.id for t in self.timesheet_works]),
                 ('end', '=', None)])
         if not lines:
             return []
@@ -141,6 +143,8 @@ class Work:
         pass
 
     def start_work(self):
+        if not self.timesheet_available:
+            return
         Line = Pool().get('timesheet.line')
         User = Pool().get('res.user')
         user = User(Transaction().user)
@@ -187,5 +191,5 @@ class Work:
     @classmethod
     def view_attributes(cls):
         return [('/form//group[@id="timetracker_buttons"]', 'states', {
-                    'invisible': Eval('type') == 'project',
+                    'invisible': invisible,
                     })]
