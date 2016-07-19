@@ -149,7 +149,7 @@ class Work:
         User = Pool().get('res.user')
         user = User(Transaction().user)
         line = Line()
-        line.work = self.work.id
+        line.work, = self.timesheet_works
         line.start = Line.default_start()
         line.duration = Line.default_duration()
         line.employee = user.employee.id
@@ -163,8 +163,9 @@ class Work:
         User = Pool().get('res.user')
         user = User(Transaction().user)
 
+        tworks = [t.id for x in tasks for t in x.timesheet_works]
         lines = Line.search([
-                ('work', 'in', [x.work.id for x in tasks]),
+                ('work', 'in', tworks),
                 ('employee', '=', user.employee.id),
                 ('start', '!=', None),
                 ('end', '=', None),
@@ -179,8 +180,9 @@ class Work:
         User = Pool().get('res.user')
         user = User(Transaction().user)
 
+        tworks = [t.id for x in tasks for t in x.timesheet_works]
         lines = Line.search([
-                ('work', 'in', [x.work.id for x in tasks]),
+                ('work', 'in', tworks),
                 ('employee', '=', user.employee.id),
                 ('start', '!=', None),
                 ('end', '=', None),
