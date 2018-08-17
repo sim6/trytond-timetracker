@@ -13,8 +13,7 @@ from trytond.transaction import Transaction
 __all__ = ['Line']
 
 
-class Line:
-    __metaclass__ = PoolMeta
+class Line(metaclass=PoolMeta):
     __name__ = 'timesheet.line'
     start = fields.DateTime('Start')
     end = fields.DateTime('End')
