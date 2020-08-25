@@ -105,7 +105,7 @@ class Line(metaclass=PoolMeta):
     def _calc_duration(self, end, start=None):
         if not start:
             start = self.start
-        if isinstance(end, date):
+        if type(end) == date:
             end = datetime.combine(end, datetime.min.time())
         return end - start
 
