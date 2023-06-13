@@ -109,7 +109,7 @@ class Line(metaclass=PoolMeta):
             line.stop()
 
     def stop(self):
-        self.end = datetime.now()
+        self.end = datetime.now().replace(microsecond=0)
         self.duration = self._calc_duration(self.end)
         self.save()
 
