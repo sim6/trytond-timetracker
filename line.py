@@ -84,6 +84,10 @@ class Line(metaclass=PoolMeta):
         return lines
 
     @staticmethod
+    def default_start():
+        return datetime.now()
+
+    @staticmethod
     def default_duration():
         return timedelta(seconds=0)
 
